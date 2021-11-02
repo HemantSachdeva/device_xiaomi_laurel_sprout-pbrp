@@ -12,12 +12,21 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_base.mk)
 # Inherit from laurel_sprout device
 $(call inherit-product, device/xiaomi/laurel_sprout/device.mk)
 
-# Inherit some common Omni stuff.
-$(call inherit-product, vendor/twrp/config/common.mk)
+# Inherit some common Pitch Black stuff.
+$(call inherit-product, vendor/pb/config/common.mk)
 
 # Device identifier. This must come after all inclusions
 PRODUCT_DEVICE := laurel_sprout
-PRODUCT_NAME := twrp_laurel_sprout
+PRODUCT_NAME := omni_laurel_sprout
 PRODUCT_BRAND := Xiaomi
 PRODUCT_MODEL := Mi A3
 PRODUCT_MANUFACTURER := xiaomi
+MAINTAINER := "Hemant Sachdeva"
+
+PRODUCT_SYSTEM_PROPERTY_BLACKLIST += \
+    ro.build.date.utc \
+    ro.bootimage.build.date.utc
+
+# HACK: Set vendor patch level
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.vendor.build.security_patch=2069-12-31
